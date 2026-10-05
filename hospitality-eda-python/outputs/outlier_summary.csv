@@ -1,0 +1,4 @@
+variable,lower_fence,upper_fence,iqr_outliers,zscore>3_outliers
+adr,15.0,235.4,287,64
+lead_time,-71.5,204.5,250,87
+total_revenue,-248.1,1146.9,210,82

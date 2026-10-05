@@ -1,0 +1,10 @@
+,lead_time_capped,stay_nights,adr_capped,total_guests,special_requests,previous_cancellations,parking_spaces,total_revenue,is_canceled
+lead_time_capped,1.0,0.014,-0.014,0.008,-0.001,0.007,0.001,0.002,0.166
+stay_nights,0.014,1.0,-0.018,-0.007,0.0,0.007,-0.009,0.695,0.012
+adr_capped,-0.014,-0.018,1.0,0.127,-0.003,0.001,-0.009,0.587,0.01
+total_guests,0.008,-0.007,0.127,1.0,-0.03,0.017,0.014,0.059,0.01
+special_requests,-0.001,0.0,-0.003,-0.03,1.0,0.001,0.012,-0.0,-0.129
+previous_cancellations,0.007,0.007,0.001,0.017,0.001,1.0,-0.012,0.003,0.15
+parking_spaces,0.001,-0.009,-0.009,0.014,0.012,-0.012,1.0,-0.002,-0.065
+total_revenue,0.002,0.695,0.587,0.059,-0.0,0.003,-0.002,1.0,0.012
+is_canceled,0.166,0.012,0.01,0.01,-0.129,0.15,-0.065,0.012,1.0

@@ -1,0 +1,126 @@
+====================================================================== 
+1. DATA OVERVIEW
+ ======================================================================
+Shape: (6020, 17)
+booking_id                         int64
+hotel                                str
+arrival_date              datetime64[us]
+lead_time                          int64
+stay_nights                        int64
+weekend_nights                     int64
+week_nights                        int64
+adults                             int64
+children                         float64
+market_segment                       str
+room_type                            str
+country                              str
+adr                              float64
+special_requests                   int64
+previous_cancellations             int64
+parking_spaces                     int64
+is_canceled                        int64
+
+Missing values:
+ children     60
+country     120
+Duplicate rows: 20
+
+ ====================================================================== 
+2. CLEANING
+ ======================================================================
+Rows after de-duplication: 6000
+
+ ====================================================================== 
+3. DESCRIPTIVE STATISTICS
+ ======================================================================
+                   count    mean     std    min     25%     50%     75%      max  median   variance     iqr  skewness  kurtosis
+lead_time         6000.0   76.38   64.45   1.00   32.00   61.00  101.00   678.00   61.00    4153.93   69.00      2.58     13.15
+stay_nights       6000.0    3.67    1.72   1.00    2.00    4.00    5.00     9.00    4.00       2.95    3.00      0.39     -0.46
+adr               6000.0  133.85   58.34  54.85   97.68  121.20  152.77   874.78  121.20    3403.75   55.09      4.14     35.05
+total_guests      6000.0    2.20    0.83   1.00    2.00    2.00    2.00     6.00    2.00       0.69    0.00      1.03      1.64
+total_revenue     6000.0  489.45  324.30  59.43  275.00  429.58  623.74  5229.90  429.58  105169.32  348.74      2.99     23.94
+special_requests  6000.0    0.66    0.86   0.00    0.00    0.00    1.00     3.00    0.00       0.74    1.00      1.17      0.50
+
+Categorical frequencies:
+
+hotel
+ hotel
+City Hotel      62.9
+Resort Hotel    37.1
+
+market_segment
+ market_segment
+Online TA        44.6
+Direct           18.8
+Offline TA/TO    16.5
+Corporate        11.8
+Groups            8.3
+
+room_type
+ room_type
+Standard    50.0
+Deluxe      29.4
+Family      12.4
+Suite        8.2
+
+Mean ADR by room type:
+              mean  median    std
+room_type                       
+Deluxe     143.95  138.36  45.19
+Family     164.59  159.95  35.23
+Standard   101.95   97.88  38.86
+Suite      245.83  236.83  50.43
+
+ ====================================================================== 
+4. OUTLIER DETECTION (IQR + Z-score)
+ ======================================================================
+     variable  lower_fence  upper_fence  iqr_outliers  zscore>3_outliers
+          adr         15.0        235.4           287                 64
+    lead_time        -71.5        204.5           250                 87
+total_revenue       -248.1       1146.9           210                 82
+  saved figures/04_outlier_boxplots.png
+
+5. VISUALISATIONS
+  saved figures/01_distributions.png
+  saved figures/02_segments_room_types.png
+  saved figures/03_time_series.png
+  saved figures/07_month_weekday_heatmap.png
+  saved figures/05_scatter_relationships.png
+
+ ====================================================================== 
+6. CORRELATION ANALYSIS
+ ======================================================================
+Pearson correlation with cancellation:
+ special_requests         -0.129
+parking_spaces           -0.065
+total_guests              0.010
+adr_capped                0.010
+stay_nights               0.012
+total_revenue             0.012
+previous_cancellations    0.150
+lead_time_capped          0.166
+  saved figures/06_correlation_heatmap.png
+
+Welch t-test lead time (cancelled vs kept): t=10.65, p=1.17e-25
+Chi-square market_segment vs cancellation: chi2=171.9, p=4.09e-36
+ANOVA ADR across room types: F=5012.3, p=0.00e+00
+  saved figures/08_cancellations.png
+
+Overall cancellation rate: 21.1%
+Cancellation by lead bucket (%):
+ lead_bucket
+0-7d       11.5
+8-30d      16.0
+31-90d     18.4
+91-180d    27.5
+180d+      37.5
+  saved figures/09_revenue_by_room.png
+
+Realised revenue share by room type (%):
+ room_type
+Deluxe      31.2
+Family      15.0
+Standard    39.0
+Suite       14.9
+
+Done. Figures in ./figures, tables in ./outputs
